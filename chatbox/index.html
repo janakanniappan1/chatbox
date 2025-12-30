@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blaze Chat UI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0,255,156,.18), transparent 35%),
+    radial-gradient(circle at 80% 90%, rgba(0,255,156,.25), transparent 40%),
+    #020403;
+}
+
+/* container */
+.chat{
+  width:400px;
+  height:650px;
+  background:linear-gradient(180deg,#030504,#070b09);
+  border-radius:18px;
+  box-shadow:
+    0 0 0 1px rgba(0,255,156,.2),
+    0 0 40px rgba(0,255,156,.15),
+    0 30px 80px rgba(0,0,0,1);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  position:relative;
+}
+
+/* fire glow overlay */
+.chat::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at bottom, rgba(0,255,156,.2), transparent 55%);
+  pointer-events:none;
+  animation:fireGlow 4s ease-in-out infinite;
+}
+
+@keyframes fireGlow{
+  0%,100%{opacity:.4}
+  50%{opacity:.85}
+}
+
+/* header */
+.header{
+  padding:18px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid rgba(0,255,156,.2);
+  background:linear-gradient(180deg,#040806,#020403);
+}
+
+.avatar{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#00ff9c,#00c97a);
+  color:#001a11;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  box-shadow:0 0 25px rgba(0,255,156,.8);
+}
+
+.header h4{
+  font-size:15px;
+  color:#eafff6;
+}
+
+.header span{
+  font-size:12px;
+  color:#7fffd4;
+  opacity:.85;
+}
+
+/* messages */
+.messages{
+  flex:1;
+  padding:20px;
+  background:linear-gradient(180deg,#020403,#040806);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  overflow-y:auto;
+}
+
+/* message bubble */
+.msg{
+  max-width:75%;
+  padding:14px 16px;
+  font-size:13.5px;
+  line-height:1.55;
+  border-radius:14px;
+  position:relative;
+  animation:rise .35s ease;
+}
+
+@keyframes rise{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* bot */
+.bot{
+  background:
+    linear-gradient(180deg,rgba(0,255,156,.12),rgba(0,255,156,.05));
+  border:1px solid rgba(0,255,156,.35);
+  color:#caffea;
+  box-shadow:
+    0 0 20px rgba(0,255,156,.25),
+    inset 0 0 12px rgba(0,255,156,.15);
+}
+
+/* user */
+.user{
+  background:linear-gradient(135deg,#00ff9c,#00c97a);
+  color:#001f14;
+  margin-left:auto;
+  box-shadow:0 0 30px rgba(0,255,156,.7);
+}
+
+/* fire spark tails */
+.bot::after,
+.user::after{
+  content:"";
+  position:absolute;
+  top:16px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#00ff9c;
+  box-shadow:
+    0 0 12px #00ff9c,
+    0 0 22px rgba(0,255,156,.9);
+  animation:spark 1.6s infinite alternate;
+}
+
+.bot::after{ left:-7px }
+.user::after{ right:-7px }
+
+@keyframes spark{
+  from{opacity:.4;transform:scale(.8)}
+  to{opacity:1;transform:scale(1.2)}
+}
+
+/* input */
+.input{
+  padding:16px;
+  display:flex;
+  gap:10px;
+  border-top:1px solid rgba(0,255,156,.2);
+  background:#020403;
+}
+
+.input input{
+  flex:1;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(0,255,156,.35);
+  background:#010302;
+  color:#eafff6;
+  outline:none;
+  font-size:13px;
+  box-shadow:inset 0 0 10px rgba(0,255,156,.15);
+}
+
+.input input::placeholder{
+  color:#6cffc6;
+}
+
+.input button{
+  padding:0 22px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg,#00ff9c,#00c97a);
+  color:#001f14;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 0 30px rgba(0,255,156,.9);
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat">
+
+  <div class="header">
+    <div class="avatar">JK</div>
+    <div>
+      <h4>Chatly</h4>
+      <span>Online • Probably caffeinated ☕</span>
+    </div>
+  </div>
+
+  <div class="messages">
+    <div class="msg bot">
+      Welcome back 👋<br>
+      System stable. Coffee levels critical 😶‍🌫️
+    </div>
+
+    <div class="msg user">
+      Sounds like my life 😓🫠
+    </div>
+
+    <div class="msg bot">
+      Excellent.<br>
+      We are now emotionally synchronized broo 🦧
+    </div>
+
+    <div class="msg user">
+      Can you fix my account?
+    </div>
+
+    <div class="msg bot">
+      Fixing accounts is easy.<br>
+      Fixing humans costs extra. 😭🙌
+    </div>
+  </div>
+
+  <div class="input">
+    <input type="text" placeholder="Type carefully… Jana is watching 👀" />
+    <button>Send</button>
+  </div>
+
+</div>
+
+</body>
+</html>
